@@ -9,7 +9,7 @@ export default function App() {
     const receberUsuario = async () => {
         const resposta = await fetch('https://randomuser.me/api');
         const dados = await resposta.json();
-         setUsuario(dados);
+         setUsuario(dados.results);
     }
     receberUsuario();
   }, []);
@@ -18,14 +18,16 @@ export default function App() {
     <>
       <h1>Usuário</h1>
       <ul>
-        {usuario.map(informacao=>(
+        {usuario.length>0&& usuario.map(informacao=>(
           <li key={informacao.resultados}>
-            <h2>{}</h2>
+            <h2>{`${informacao.primeironome} ${informacao.segundonome}`}</h2>
+            <p>Email:{informacao.email}</p>
+            <p>País: {informacao.pais}</p>
+            <p>Telefone: {informacao.telefone}</p>
+            <img src={Image}/>
           </li>
         ))}
-        
-            //complete o código
-        
+      
       </ul>
     </>
   );
